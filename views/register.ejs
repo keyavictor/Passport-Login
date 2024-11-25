@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #f0f2f5;
+      }
+
+      .register-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .register-form h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #1a73e8;
+      }
+
+      .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+        transition: 0.3s;
+      }
+
+      .form-group label {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+        pointer-events: none;
+        transition: 0.3s;
+      }
+
+      .form-group input:focus,
+      .form-group input:valid {
+        border-color: #1a73e8;
+      }
+
+      .form-group input:focus + label,
+      .form-group input:valid + label {
+        top: -10px;
+        left: 5px;
+        font-size: 0.8rem;
+        background: white;
+        padding: 0 5px;
+        color: #1a73e8;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: #1a73e8;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #1557b0;
+      }
+
+      .oauth {
+        text-align: center;
+        margin-top: 1.5rem;
+      }
+
+      .oauth a {
+        color: #1a73e8;
+        text-decoration: none;
+      }
+
+      .oauth a:hover {
+        text-decoration: underline;
+      }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+      <form class="register-form" action="/api/users/register" method="POST" onsubmit="return validateForm()">
+        <h2>Create an Account</h2>
+        <div class="form-group">
+            <input type="text" id="fname" name="firstName" required>
+            <label for="fname">First Name</label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="lname" name="lastName" required>
+            <label for="lname">Last Name</label>
+        </div>
+        <div class="form-group">
+            <input type="email" id="email" name="email" required>
+            <label for="email">Email</label>
+        </div>
+        <div class="form-group">
+            <input type="password" id="password" name="password" required>
+            <label for="password">Password</label>
+        </div>
+        <div class="form-group">
+            <input type="password" id="confirmPassword" required>
+            <label for="confirmPassword">Confirm Password</label>
+        </div>
+        <button type="submit">Register</button>
+        <div class="oauth">
+            <p>Or register using</p>
+            <a href="#">Google</a> | <a href="#">Facebook</a>
+        </div>
+    </form>
+    
+    </div>
+    <script>
+      function validateForm() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+          alert('Passwords do not match!');
+          return false;
+        }
+        return true;
+      }
+    </script>
+    <script>
+      function validateForm() {
+          const formData = new FormData(document.querySelector('.register-form'));
+          for (let [key, value] of formData.entries()) {
+              console.log(key, value); // Log form data before submission
+          }
+          return true; // Proceed with form submission
+      }
+  </script>
+  
+</body>
+</html>

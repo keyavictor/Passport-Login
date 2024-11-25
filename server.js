@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+require('dotenv').config();
 
 // Import required modules
 const app = require('./app'); // Import the Express app
